@@ -23,8 +23,7 @@ tasks.register("analyze") {
 ```
 buildscript {
     repositories {
-        mavenLocal()
-        gradlePluginPortal()
+        mavenLocal()        
     }
     dependencies {
         classpath 'com.simple:simple-formatter:0.0.1'
