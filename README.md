@@ -1,6 +1,6 @@
 # Code Refactoring and Analysis Plugin
 
-This plugin offers simple code refactoring and analysis tools, perfect for those working on Java Gradle applications outside of IntelliJ IDEA. No more missing the magic of `C-A-l` or dealing with ineffective LSP `:Format`.
+This plugin offers simple code refactoring and analysis tools, perfect for those working on Java Gradle applications outside of IntelliJ IDEA. No more missing the magic of `<C-A-l>` or dealing with ineffective LSP `:Format`.
 
 ## Setup
 
