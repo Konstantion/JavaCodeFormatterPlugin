@@ -13,6 +13,7 @@ import org.gradle.api.plugins.quality.CheckstyleExtension
 import org.gradle.api.plugins.quality.CheckstylePlugin
 import org.gradle.api.plugins.quality.PmdPlugin
 import org.gradle.api.resources.TextResource
+import org.gradle.kotlin.dsl.getByType
 
 class JavaFormatter : org.gradle.api.Plugin<Project> {
     override fun apply(project: Project): Unit = with(project) {
@@ -29,10 +30,9 @@ class JavaFormatter : org.gradle.api.Plugin<Project> {
             targetCompatibility = JavaVersion.VERSION_11
         }
 
-        extensions.getByType(SpotlessExtension::class.java).java { spotless ->
-            spotless.lineEndings = LineEnding.PLATFORM_NATIVE
-            spotless
-                .prettier(mapOf("prettier" to "2.7.1", "prettier-plugin-java" to "2.0.0"))
+        extensions.getByType<SpotlessExtension>().java { ->
+            lineEndings = LineEnding.PLATFORM_NATIVE
+            prettier(mapOf("prettier" to "2.7.1", "prettier-plugin-java" to "2.0.0"))
                 .config(
                     mapOf(
                         "parser" to "java",
@@ -44,7 +44,7 @@ class JavaFormatter : org.gradle.api.Plugin<Project> {
                 )
         }
 
-        extensions.getByType(CheckerFrameworkExtension::class.java).apply {
+        extensions.getByType<CheckerFrameworkExtension>().apply {
             checkers = listOf("org.checkerframework.checker.nullness.NullnessChecker")
             extraJavacArgs = listOf(
                 "-Werror",
@@ -52,20 +52,20 @@ class JavaFormatter : org.gradle.api.Plugin<Project> {
             )
         }
 
-        extensions.getByType(CheckstyleExtension::class.java).apply {
+        extensions.getByType<CheckstyleExtension>().apply {
             toolVersion = "10.3.1"
             config = load("/checkstyle.xml")
             configProperties = mapOf("checkstyle.cache.file" to rootProject.file("${buildDir}/checkstyle.cache"))
         }
 
         tasks.register("format") {
-            it.dependsOn("spotlessApply")
+            dependsOn("spotlessApply")
         }
 
         tasks.register("analyze") {
-            it.dependsOn("checkstyleMain")
+            dependsOn("checkstyleMain")
             //TODO: resolve this problem
-            //it.dependsOn("checkerFrameworkMain")
+            //dependsOn("checkerFrameworkMain")
         }
     }
 

@@ -1,8 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.8.0"
     id("maven-publish")
-    `java-gradle-plugin`
-    application
+    id("org.gradle.kotlin.kotlin-dsl") version "3.2.0"
 }
 
 group = "com.simple"
@@ -29,10 +27,6 @@ gradlePlugin.plugins.create("JavaFormatter") {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-application {
-    mainClass.set("MainKt")
 }
 
 publishing {
