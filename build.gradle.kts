@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.simple"
-version = "0.0.1"
+version = "0.0.2"
 
 kotlin {
     jvmToolchain(8)
