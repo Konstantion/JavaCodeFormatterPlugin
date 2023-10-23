@@ -26,7 +26,7 @@ buildscript {
         mavenLocal()        
     }
     dependencies {
-        classpath 'com.simple:simple-formatter:0.0.1'
+        classpath 'com.simple:simple-formatter:0.0.2'
     }
 }
 
